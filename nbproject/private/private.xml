@@ -4,12 +4,28 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/lexico.jflex</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/Generador.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/Declaracion.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/expresiones/Aritmeticas.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/tipoDato.java</file>
             <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/sintactico.cup</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/scanner.java</file>
             <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/proyecto1_vj2024/Interfaz.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/DoWhile.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/abstracto/Instruccion.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/Tipo.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/expresiones/OperadoresLogicos.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/Arbol.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/parser.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/Print.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/tablaSimbolos.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/Match.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/Continue.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/scanner.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/excepciones/Errores.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/expresiones/AccesoVar.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/AsignacionVar.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/Simbolo.java</file>
             <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/proyecto1_vj2024/Proyecto1_VJ2024.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/Parser.java</file>
+            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/For.java</file>
         </group>
     </open-files>
 </project-private>

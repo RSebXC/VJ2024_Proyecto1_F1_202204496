@@ -8,35 +8,107 @@ package analisis;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int CADENA = 2;
-  public static final int DECIMAL = 4;
-  public static final int MENOS = 8;
-  public static final int UMENOS = 13;
-  public static final int MULT = 9;
+  public static final int PAR2 = 15;
+  public static final int PAR1 = 14;
+  public static final int POW = 26;
+  public static final int INCREMENT = 23;
+  public static final int MULT = 20;
+  public static final int CONST = 43;
+  public static final int CHAR = 11;
+  public static final int CHAR_LITERAL = 5;
+  public static final int LLAVE2 = 42;
+  public static final int EQUALS = 22;
+  public static final int LLAVE1 = 41;
+  public static final int IMPRIMIR = 8;
   public static final int ENTERO = 3;
+  public static final int XOR = 32;
+  public static final int DOUBLE = 10;
+  public static final int CONTINUE = 49;
+  public static final int INT = 9;
+  public static final int FOR = 45;
+  public static final int DECREMENT = 24;
+  public static final int MENORIGUAL = 35;
+  public static final int NOT = 29;
+  public static final int FINCADENA = 7;
+  public static final int AND = 33;
+  public static final int IGUAL = 25;
+  public static final int OR = 31;
+  public static final int BOOL = 39;
+  public static final int DIV = 19;
+  public static final int IF = 38;
+  public static final int UMENOS = 18;
+  public static final int ID = 6;
+  public static final int MAYORIGUAL = 34;
   public static final int EOF = 0;
-  public static final int MAS = 7;
-  public static final int PAR2 = 12;
-  public static final int PAR1 = 11;
-  public static final int DIV = 10;
-  public static final int FINCADENA = 5;
+  public static final int DECIMAL = 4;
+  public static final int TRUE = 36;
   public static final int error = 1;
-  public static final int IMPRIMIR = 6;
+  public static final int CADENA = 2;
+  public static final int DIF = 30;
+  public static final int MENOS = 17;
+  public static final int MENOR = 27;
+  public static final int MOD = 21;
+  public static final int BREAK = 48;
+  public static final int MAYOR = 28;
+  public static final int DOWHILE = 47;
+  public static final int ELSE = 40;
+  public static final int WHILE = 46;
+  public static final int DPUNTOS = 13;
+  public static final int STRING = 12;
+  public static final int FALSE = 37;
+  public static final int VAR = 44;
+  public static final int MAS = 16;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "CADENA",
   "ENTERO",
   "DECIMAL",
+  "CHAR_LITERAL",
+  "ID",
   "FINCADENA",
   "IMPRIMIR",
-  "MAS",
-  "MENOS",
-  "MULT",
-  "DIV",
+  "INT",
+  "DOUBLE",
+  "CHAR",
+  "STRING",
+  "DPUNTOS",
   "PAR1",
   "PAR2",
-  "UMENOS"
+  "MAS",
+  "MENOS",
+  "UMENOS",
+  "DIV",
+  "MULT",
+  "MOD",
+  "EQUALS",
+  "INCREMENT",
+  "DECREMENT",
+  "IGUAL",
+  "POW",
+  "MENOR",
+  "MAYOR",
+  "NOT",
+  "DIF",
+  "OR",
+  "XOR",
+  "AND",
+  "MAYORIGUAL",
+  "MENORIGUAL",
+  "TRUE",
+  "FALSE",
+  "IF",
+  "BOOL",
+  "ELSE",
+  "LLAVE1",
+  "LLAVE2",
+  "CONST",
+  "VAR",
+  "FOR",
+  "WHILE",
+  "DOWHILE",
+  "BREAK",
+  "CONTINUE"
   };
 }
 

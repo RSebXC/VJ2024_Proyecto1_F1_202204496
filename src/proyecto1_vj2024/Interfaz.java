@@ -4,6 +4,20 @@
  */
 package proyecto1_vj2024;
 
+import abstracto.Instruccion;
+import analisis.parser;
+import analisis.scanner;
+import excepciones.Errores;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.StringReader;
+import java.util.LinkedList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import simbolo.Arbol;
+import simbolo.Simbolo;
+import simbolo.tablaSimbolos;
 /**
  *
  * @author rodri
@@ -60,11 +74,21 @@ public class Interfaz extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Ejecutar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(0, 102, 0));
         jButton4.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Reportes");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 204));
@@ -72,6 +96,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         jTextArea1.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea1.setForeground(new java.awt.Color(255, 153, 255));
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -82,6 +107,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         jTextArea2.setBackground(new java.awt.Color(0, 0, 0));
         jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea2.setForeground(new java.awt.Color(102, 204, 0));
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
@@ -156,6 +182,100 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        // TODO add your handling code here:
+        try{
+            String texto = jTextArea1.getText();
+
+            scanner s = new scanner(new BufferedReader(new StringReader(texto)));
+            parser p = new parser(s);
+            var resultado = p.parse();
+            var ast = new Arbol((LinkedList<Instruccion>) resultado.value);
+            var tabla = new tablaSimbolos();
+            tabla.setNombre("GLOBAL");
+            ast.setConsola("");
+            LinkedList<Errores> listaErrores = new LinkedList<>();
+            listaErrores.addAll(s.listaErrores);
+            listaErrores.addAll(p.listaErrores);
+            for (var a : ast.getInstrucciones()) {
+                if (a == null) {
+                    continue;
+                }
+
+                var res = a.interpretar(ast, tabla);
+                if (res instanceof Errores) {
+                    listaErrores.add((Errores) res);
+                }
+            }
+
+            jTextArea2.setText(ast.getConsola());
+
+            String tablaSimbolosHTML = generarTablaSimbolosHTML(tabla);
+            String tablaErroresHTML = generarTablaErroresHTML(listaErrores);
+
+            escribirArchivoHTML("tabla_simbolos.html", tablaSimbolosHTML);
+            escribirArchivoHTML("tabla_errores.html", tablaErroresHTML);
+
+        } catch (Exception ex) {
+            System.out.println("Algo malio sal");
+            System.out.println(ex);
+}
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    
+    
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    // Generar reporte de errores en HTML
+
+
+    
+}//GEN-LAST:event_jButton4ActionPerformed
+
+  private String generarTablaSimbolosHTML(tablaSimbolos tabla) {
+        StringBuilder html = new StringBuilder();
+        html.append("<html><body>");
+        html.append("<h2>Tabla de Símbolos</h2>");
+        html.append("<table border='1'><tr><th>Nombre</th><th>Valor</th></tr>");
+
+        for (var entry : tabla.getTablaActual().entrySet()) {
+            Simbolo simbolo = (Simbolo) entry.getValue();
+            html.append("<tr><td>").append(simbolo.getId()).append("</td><td>").append(simbolo.getValor()).append("</td></tr>");
+        }
+
+        html.append("</table>");
+        html.append("</body></html>");
+        return html.toString();
+    }
+
+    private String generarTablaErroresHTML(LinkedList<Errores> listaErrores) {
+        StringBuilder html = new StringBuilder();
+        html.append("<html><body>");
+        html.append("<h2>Tabla de Errores</h2>");
+        html.append("<table border='1'><tr><th>Tipo</th><th>Descripción</th><th>Línea</th><th>Columna</th></tr>");
+
+        for (Errores error : listaErrores) {
+            html.append("<tr><td>").append(error.getTipo()).append("</td><td>").append(error.getDesc()).append("</td><td>").append(error.getLinea()).append("</td><td>").append(error.getColumna()).append("</td></tr>");
+        }
+
+        html.append("</table>");
+        html.append("</body></html>");
+        return html.toString();
+    }
+
+    private void escribirArchivoHTML(String nombreArchivo, String contenidoHTML) {
+        try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
+            fileWriter.write(contenidoHTML);
+        } catch (Exception e) {
+            e.printStackTrace();
+}
+}
+    
+    
+    
     /**
      * @param args the command line arguments
      */

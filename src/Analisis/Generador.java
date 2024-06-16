@@ -17,7 +17,7 @@ public class Generador {
 
     public static void generarCompilador() {
         try{
-            String ruta = "./src/Analisis/";
+            String ruta = "src/Analisis/";
             /*
                 ruta -> ruta del los archivos
                 -d -> ruta donde se genera la salida
