@@ -9,6 +9,7 @@ package simbolo;
  * @author rodri
  */
 public class Tipo {
+        private String nombre;
      private tipoDato tipo;
 
     public Tipo(tipoDato tipo) {
@@ -22,4 +23,6 @@ public class Tipo {
     public void setTipo(tipoDato tipo) {
         this.tipo = tipo;
     }
+    
+    
 }

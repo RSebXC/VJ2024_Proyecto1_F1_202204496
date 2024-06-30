@@ -8,10 +8,18 @@ import abstracto.Instruccion;
 import analisis.parser;
 import analisis.scanner;
 import excepciones.Errores;
+import instrucciones.AsignacionVar;
+import instrucciones.Declaracion;
+import instrucciones.Execute;
+import instrucciones.Metodo;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.LinkedList;
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -118,7 +126,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,25 +141,21 @@ public class Interfaz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88)))
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
+                .addContainerGap(16, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -164,15 +168,15 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -180,47 +184,102 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+        @Override
+        public boolean accept(File file) {
+            return file.isDirectory() || file.getName().toLowerCase().endsWith(".jc");
+        }
+
+        @Override
+        public String getDescription() {
+            return "JC Files (*.jc)";
+        }
+    });
+    
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        try (BufferedReader reader = new BufferedReader(new FileReader(selectedFile))) {
+            StringBuilder content = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+            jTextArea1.setText(content.toString());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        // TODO add your handling code here:
-        try{
-            String texto = jTextArea1.getText();
+    try {
+        String texto = jTextArea1.getText();
 
-            scanner s = new scanner(new BufferedReader(new StringReader(texto)));
-            parser p = new parser(s);
-            var resultado = p.parse();
-            var ast = new Arbol((LinkedList<Instruccion>) resultado.value);
-            var tabla = new tablaSimbolos();
-            tabla.setNombre("GLOBAL");
-            ast.setConsola("");
-            LinkedList<Errores> listaErrores = new LinkedList<>();
-            listaErrores.addAll(s.listaErrores);
-            listaErrores.addAll(p.listaErrores);
-            for (var a : ast.getInstrucciones()) {
-                if (a == null) {
-                    continue;
-                }
+        scanner s = new scanner(new BufferedReader(new StringReader(texto)));
+        parser p = new parser(s);
+        var resultado = p.parse();
+        var ast = new Arbol((LinkedList<Instruccion>) resultado.value);
+        var tablaGlobal = new tablaSimbolos();
+        tablaGlobal.setNombre("GLOBAL");
+        ast.setConsola("");
+        ast.setTablaGlobal(tablaGlobal);
+        LinkedList<Errores> listaErrores = new LinkedList<>();
+        listaErrores.addAll(s.listaErrores);
+        listaErrores.addAll(p.listaErrores);
 
-                var res = a.interpretar(ast, tabla);
-                if (res instanceof Errores) {
-                    listaErrores.add((Errores) res);
+        // 1. Almacenar funciones y métodos
+        for (var a : ast.getInstrucciones()) {
+            if (a == null) continue;
+            if (a instanceof Metodo) {
+                a.interpretar(ast, tablaGlobal);
+                ast.addFunciones(a);
+            }
+        }
+
+        // 2. Declaraciones o asignaciones globales
+        for (var a : ast.getInstrucciones()) {
+            if (a == null) continue;
+            if (a instanceof Declaracion || a instanceof AsignacionVar) {
+                var res = a.interpretar(ast, tablaGlobal);
+                if (res instanceof Errores errores) {
+                    listaErrores.add(errores);
                 }
             }
+        }
 
-            jTextArea2.setText(ast.getConsola());
+        // 3. Ejecutar el comando principal (execute)
+        Execute e = null;
+        for (var a : ast.getInstrucciones()) {
+            if (a == null) continue;
+            if (a instanceof Execute execute) {
+                e = execute;
+                break;
+            }
+        }
+        if (e != null) {
+            var resultadoExecute = e.interpretar(ast, tablaGlobal);
+            if (resultadoExecute instanceof Errores) {
+                listaErrores.add((Errores) resultadoExecute);
+            }
+        }
 
-            String tablaSimbolosHTML = generarTablaSimbolosHTML(tabla);
-            String tablaErroresHTML = generarTablaErroresHTML(listaErrores);
+        jTextArea2.setText(ast.getConsola());
 
-            escribirArchivoHTML("tabla_simbolos.html", tablaSimbolosHTML);
-            escribirArchivoHTML("tabla_errores.html", tablaErroresHTML);
+        // Generar y escribir el HTML de la tabla de símbolos después de toda la ejecución
+        String tablaSimbolosHTML = generarTablaSimbolosHTML(tablaGlobal);
+        String tablaErroresHTML = generarTablaErroresHTML(listaErrores);
 
-        } catch (Exception ex) {
-            System.out.println("Algo malio sal");
-            System.out.println(ex);
-}
+        escribirArchivoHTML("tabla_simbolos.html", tablaSimbolosHTML);
+        escribirArchivoHTML("tabla_errores.html", tablaErroresHTML);
+
+    } catch (Exception ex) {
+        System.out.println("Algo malio sal");
+        System.out.println(ex);
+    }
+
 
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -236,20 +295,29 @@ public class Interfaz extends javax.swing.JFrame {
 }//GEN-LAST:event_jButton4ActionPerformed
 
   private String generarTablaSimbolosHTML(tablaSimbolos tabla) {
-        StringBuilder html = new StringBuilder();
-        html.append("<html><body>");
-        html.append("<h2>Tabla de Símbolos</h2>");
-        html.append("<table border='1'><tr><th>Nombre</th><th>Valor</th></tr>");
+    StringBuilder html = new StringBuilder();
+    html.append("<html><body>");
+    html.append("<h2>Tabla de Símbolos</h2>");
+    html.append("<table border='1'><tr><th>Ámbito</th><th>Nombre</th><th>Tipo</th><th>Valor</th></tr>");
 
+    while (tabla != null) {
+        String ambito = tabla.getNombre().isEmpty() ? "Global" : tabla.getNombre();
         for (var entry : tabla.getTablaActual().entrySet()) {
             Simbolo simbolo = (Simbolo) entry.getValue();
-            html.append("<tr><td>").append(simbolo.getId()).append("</td><td>").append(simbolo.getValor()).append("</td></tr>");
+            html.append("<tr><td>").append(ambito)
+                .append("</td><td>").append(simbolo.getId())
+                .append("</td><td>").append(simbolo.getTipo().toString())
+                .append("</td><td>").append(simbolo.getValor().toString())
+                .append("</td></tr>");
         }
-
-        html.append("</table>");
-        html.append("</body></html>");
-        return html.toString();
+        tabla = tabla.getTablaAnterior();
     }
+
+    html.append("</table>");
+    html.append("</body></html>");
+    return html.toString();
+}
+
 
     private String generarTablaErroresHTML(LinkedList<Errores> listaErrores) {
         StringBuilder html = new StringBuilder();

@@ -8,56 +8,67 @@ package analisis;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int PAR2 = 15;
-  public static final int PAR1 = 14;
-  public static final int POW = 26;
-  public static final int INCREMENT = 23;
-  public static final int MULT = 20;
-  public static final int CONST = 43;
+  public static final int PAR2 = 16;
+  public static final int PAR1 = 15;
+  public static final int POW = 27;
+  public static final int INCREMENT = 24;
+  public static final int MULT = 21;
+  public static final int CONST = 46;
   public static final int CHAR = 11;
   public static final int CHAR_LITERAL = 5;
-  public static final int LLAVE2 = 42;
-  public static final int EQUALS = 22;
-  public static final int LLAVE1 = 41;
+  public static final int REMOVE = 60;
+  public static final int LLAVE2 = 45;
+  public static final int EQUALS = 23;
+  public static final int LLAVE1 = 44;
   public static final int IMPRIMIR = 8;
   public static final int ENTERO = 3;
-  public static final int XOR = 32;
+  public static final int XOR = 33;
   public static final int DOUBLE = 10;
-  public static final int CONTINUE = 49;
+  public static final int CONTINUE = 52;
   public static final int INT = 9;
-  public static final int FOR = 45;
-  public static final int DECREMENT = 24;
-  public static final int MENORIGUAL = 35;
-  public static final int NOT = 29;
+  public static final int EXECUTE = 55;
+  public static final int FOR = 48;
+  public static final int DECREMENT = 25;
+  public static final int CORTU = 39;
+  public static final int MENORIGUAL = 36;
+  public static final int NOT = 30;
   public static final int FINCADENA = 7;
-  public static final int AND = 33;
-  public static final int IGUAL = 25;
-  public static final int OR = 31;
-  public static final int BOOL = 39;
-  public static final int DIV = 19;
-  public static final int IF = 38;
-  public static final int UMENOS = 18;
+  public static final int AND = 34;
+  public static final int APPEND = 59;
+  public static final int IGUAL = 26;
+  public static final int OR = 32;
+  public static final int BOOL = 43;
+  public static final int DIV = 20;
+  public static final int IF = 42;
+  public static final int UMENOS = 19;
   public static final int ID = 6;
-  public static final int MAYORIGUAL = 34;
+  public static final int MAYORIGUAL = 35;
   public static final int EOF = 0;
   public static final int DECIMAL = 4;
-  public static final int TRUE = 36;
+  public static final int RETURN = 56;
+  public static final int TRUE = 40;
+  public static final int NEW = 58;
   public static final int error = 1;
+  public static final int COMA = 54;
   public static final int CADENA = 2;
-  public static final int DIF = 30;
-  public static final int MENOS = 17;
-  public static final int MENOR = 27;
-  public static final int MOD = 21;
-  public static final int BREAK = 48;
-  public static final int MAYOR = 28;
-  public static final int DOWHILE = 47;
-  public static final int ELSE = 40;
-  public static final int WHILE = 46;
+  public static final int DIF = 31;
+  public static final int MENOS = 18;
+  public static final int MENOR = 28;
+  public static final int MOD = 22;
+  public static final int BREAK = 51;
+  public static final int VOID = 53;
+  public static final int MAYOR = 29;
+  public static final int DOWHILE = 50;
+  public static final int PUNTO = 14;
+  public static final int WHILE = 49;
+  public static final int LIST = 57;
+  public static final int CORI = 38;
   public static final int DPUNTOS = 13;
   public static final int STRING = 12;
-  public static final int FALSE = 37;
-  public static final int VAR = 44;
-  public static final int MAS = 16;
+  public static final int CORD = 37;
+  public static final int FALSE = 41;
+  public static final int VAR = 47;
+  public static final int MAS = 17;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -73,6 +84,7 @@ public class sym {
   "CHAR",
   "STRING",
   "DPUNTOS",
+  "PUNTO",
   "PAR1",
   "PAR2",
   "MAS",
@@ -95,11 +107,13 @@ public class sym {
   "AND",
   "MAYORIGUAL",
   "MENORIGUAL",
+  "CORD",
+  "CORI",
+  "CORTU",
   "TRUE",
   "FALSE",
   "IF",
   "BOOL",
-  "ELSE",
   "LLAVE1",
   "LLAVE2",
   "CONST",
@@ -108,7 +122,15 @@ public class sym {
   "WHILE",
   "DOWHILE",
   "BREAK",
-  "CONTINUE"
+  "CONTINUE",
+  "VOID",
+  "COMA",
+  "EXECUTE",
+  "RETURN",
+  "LIST",
+  "NEW",
+  "APPEND",
+  "REMOVE"
   };
 }
 

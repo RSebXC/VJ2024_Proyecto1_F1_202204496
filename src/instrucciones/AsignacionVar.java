@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package instrucciones;
 
 import abstracto.Instruccion;
 import excepciones.Errores;
 import simbolo.*;
 
-/**
- *
- * @author rodri
- */
 public class AsignacionVar extends Instruccion {
 
     private String id;
@@ -25,27 +17,21 @@ public class AsignacionVar extends Instruccion {
 
     @Override
     public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
-        //variable exista
         var variable = tabla.getVariable(id);
         if (variable == null) {
-            return new Errores("SEMANTICO", "Variable no exitente",
-                    this.linea, this.col);
+            return new Errores("SEMANTICO", "Variable no existente", this.linea, this.col);
         }
 
-        // interpretar el nuevo valor a asignar
         var newValor = this.exp.interpretar(arbol, tabla);
         if (newValor instanceof Errores) {
             return newValor;
         }
 
-        //validar tipos
         if (variable.getTipo().getTipo() != this.exp.tipo.getTipo()) {
-            return new Errores("SEMANTICO", "Tipos erroneos en asignacion",
-                    this.linea, this.col);
+            return new Errores("SEMANTICO", "Tipos erroneos en asignacion", this.linea, this.col);
         }
-        //this.tipo.setTipo(variable.getTipo().getTipo());
+
         variable.setValor(newValor);
         return null;
     }
-
 }

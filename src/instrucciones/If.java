@@ -13,7 +13,7 @@ import simbolo.*;
  *
  * @author rodri
  */
-public class If extends Instruccion{
+public class If extends Instruccion {
     private Instruccion condicion;
     private LinkedList<Instruccion> instrucciones;
 
@@ -24,45 +24,45 @@ public class If extends Instruccion{
     }
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
-        var cond = this.condicion.interpretar(arbol, tabla);
-        if (cond instanceof Errores) {
-            return cond;
-        }
-
-        // ver que cond sea booleano
-        if (this.condicion.tipo.getTipo() != tipoDato.BOOLEANO) {
-            return new Errores("SEMANTICO", "Expresion invalida",
-                    this.linea, this.col);
-        }
-
-        var newTabla = new tablaSimbolos(tabla);
-        if ((boolean) cond) {
-            for (var i : this.instrucciones) {
-                if (i instanceof Break) {
-                    return i;
-                }
-                if (i instanceof Continue){
-                return i;
-                }
-
-                var resultado = i.interpretar(arbol, newTabla);
-                if (resultado instanceof Break) {
-                    return resultado;
-                }
-                if (resultado instanceof Continue) {
-                    return resultado;
-                }
-                
-                if (resultado instanceof Errores) {
-                    return resultado;
-                }
-                /*
-                    Manejo de errores
-                 */
-            }
-        }
-        return null;
+public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    
+    var cond = this.condicion.interpretar(arbol, tabla);
+    if (cond instanceof Errores) {
+        return cond;
     }
 
+    // ver que cond sea booleano
+    if (this.condicion.tipo.getTipo() != tipoDato.BOOLEANO) {
+        return new Errores("SEMANTICO", "Expresion invalida",
+                this.linea, this.col);
+    }
+
+    var newTabla = new tablaSimbolos(tabla);
+    newTabla.setNombre("If");
+    tablaSimbolos tablaLocal = new tablaSimbolos(tabla);
+
+    if ((boolean) cond) {
+        for (var i : this.instrucciones) {
+            if (i instanceof Break) {
+                return i;
+            }
+            if (i instanceof Continue){
+                return i;
+            }
+
+            var resultado = i.interpretar(arbol, newTabla);
+            if (resultado instanceof Break) {
+                return resultado;
+            }
+            if (resultado instanceof Continue) {
+                return resultado;
+            }
+            
+            if (resultado instanceof Errores) {
+                return resultado;
+            }
+        }
+    }
+    return null;
+}
 }

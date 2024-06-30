@@ -30,6 +30,7 @@ public class For extends Instruccion {
     public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
         // Crear un nuevo entorno para la tabla de símbolos
         var newTabla = new tablaSimbolos(tabla);
+        newTabla.setNombre("FOR");
 
         // Interpretar la asignación inicial del bucle
         var res1 = this.asignacion.interpretar(arbol, newTabla);
@@ -52,17 +53,10 @@ public class For extends Instruccion {
                 if (i instanceof Break) {
                     return null; // Salir del bucle completamente
                 }
-                if (i instanceof Continue){
-                    break;
+                if (i instanceof Continue) {
+                    break; // Ir a la siguiente iteración del bucle
                 }
                 var resIns = i.interpretar(arbol, newTabla2);
-                if (resIns instanceof Break) {
-                    return null; // Salir del bucle completamente
-                }
-                if (resIns instanceof Continue) {
-                    
-                    break; // Ir a la siguiente iteración del bucle while
-                }
                 if (resIns instanceof Errores) {
                     return resIns;
                 }

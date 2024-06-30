@@ -61,12 +61,16 @@ MENORIGUAL = "<="
 DIF = "!="
 EQUAL = "=="
 OR = "||"
+CORTU = "[]"
 AND = "&&"
+CORI = "["
+CORD = "]"
 XOR = "^"
 INCREMENT = "++"
 DECREMENT = "--"
 PAR1 = "("
 PAR2 = ")"
+
 LLAVE1="{"
 LLAVE2="}"
 DIV = "/"
@@ -75,6 +79,7 @@ MAYOR = ">"
 MULT = "*"
 MOD = "%"
 MAS = "+"
+COMA = ","
 MENOS = "-"
 IGUAL = "="
 NOT = "!"
@@ -105,10 +110,16 @@ BREAK="break"
 WHILE = "while"
 DOWHILE = "do"
 CONTINUE = "continue"
-ELSE = "else"
+RETURN = "return"
 VAR = "var"
 CONST = "const"
-
+VOID = "void"
+EXECUTE = "start_with"
+LIST = "list"
+NEW = "new"
+APPEND = "append"
+PUNTO = "."
+REMOVE = "remove"
 
 
 %%
@@ -116,6 +127,8 @@ CONST = "const"
 <YYINITIAL> {IMPRIMIR} {return new Symbol(sym.IMPRIMIR, yyline, yycolumn, yytext());}
 
 <YYINITIAL> {XOR} {return new Symbol(sym.XOR, yyline, yycolumn, yytext());}
+<YYINITIAL> {CORD} {return new Symbol(sym.CORD, yyline, yycolumn, yytext());}
+<YYINITIAL> {CORI} {return new Symbol(sym.CORI, yyline, yycolumn, yytext());}
 <YYINITIAL> {INT} {return new Symbol(sym.INT, yyline, yycolumn, yytext());}
 <YYINITIAL> {DOUBLE} {return new Symbol(sym.DOUBLE, yyline, yycolumn, yytext());}
 <YYINITIAL> {CHAR} {return new Symbol(sym.CHAR, yyline, yycolumn, yytext());}
@@ -131,15 +144,21 @@ CONST = "const"
 <YYINITIAL> {WHILE} {return new Symbol(sym.WHILE, yyline, yycolumn,yytext());}
 <YYINITIAL> {DOWHILE} {return new Symbol(sym.DOWHILE, yyline, yycolumn,yytext());}
 <YYINITIAL> {CONTINUE} {return new Symbol(sym.CONTINUE, yyline, yycolumn,yytext());}
-<YYINITIAL> {ELSE} {return new Symbol(sym.ELSE, yyline, yycolumn,yytext());}
 <YYINITIAL> {VAR} {return new Symbol(sym.VAR, yyline, yycolumn,yytext());}
 <YYINITIAL> {CONST} {return new Symbol(sym.CONST, yyline, yycolumn,yytext());}
-
+<YYINITIAL> {VOID} {return new Symbol(sym.VOID, yyline, yycolumn,yytext());}
+<YYINITIAL> {EXECUTE} {return new Symbol(sym.EXECUTE, yyline, yycolumn,yytext());}
+<YYINITIAL> {LIST} {return new Symbol(sym.LIST, yyline, yycolumn,yytext());}
+<YYINITIAL> {NEW} {return new Symbol(sym.NEW, yyline, yycolumn,yytext());}
+<YYINITIAL> {APPEND} {return new Symbol(sym.APPEND, yyline, yycolumn,yytext());}
+<YYINITIAL> {REMOVE} {return new Symbol(sym.REMOVE, yyline, yycolumn,yytext());}
+<YYINITIAL> {RETURN} {return new Symbol(sym.RETURN, yyline, yycolumn,yytext());}
 <YYINITIAL> {ID} {
 return new Symbol(sym.ID, yyline, yycolumn,yytext());}
 
 
 <YYINITIAL> {FINCADENA} {return new Symbol(sym.FINCADENA, yyline, yycolumn, yytext());}
+<YYINITIAL> {PUNTO} {return new Symbol(sym.PUNTO, yyline, yycolumn, yytext());}
 <YYINITIAL> {PAR1} {return new Symbol(sym.PAR1, yyline, yycolumn, yytext());}
 <YYINITIAL> {INCREMENT} {return new Symbol(sym.INCREMENT, yyline, yycolumn, yytext());}
 <YYINITIAL> {PAR2} {return new Symbol(sym.PAR2, yyline, yycolumn, yytext());}
@@ -159,6 +178,8 @@ return new Symbol(sym.ID, yyline, yycolumn,yytext());}
 <YYINITIAL> {DECREMENT} {return new Symbol(sym.DECREMENT, yyline, yycolumn, yytext());}
 <YYINITIAL> {AND} {return new Symbol(sym.AND, yyline, yycolumn, yytext());}
 <YYINITIAL> {NOT} {return new Symbol(sym.NOT, yyline, yycolumn, yytext());}
+<YYINITIAL> {COMA} {return new Symbol(sym.COMA, yyline, yycolumn, yytext());}
+<YYINITIAL> {CORTU} {return new Symbol(sym.CORTU, yyline, yycolumn, yytext());}
 <YYINITIAL> {EQUAL} {return new Symbol(sym.EQUALS, yyline, yycolumn, yytext());}
 <YYINITIAL> {MAYORIGUAL} {return new Symbol(sym.MAYORIGUAL, yyline, yycolumn, yytext());}
 <YYINITIAL> {MENORIGUAL} {return new Symbol(sym.MENORIGUAL, yyline, yycolumn, yytext());}

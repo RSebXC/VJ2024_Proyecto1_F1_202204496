@@ -3,33 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/expresiones/OperadoresLogicos.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/Arbol.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/build.xml</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/Match.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/Continue.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/If.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/expresiones/Decremento.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/Simbolo.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/proyecto1_vj2024/Proyecto1_VJ2024.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/lexico.jflex</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/Declaracion.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/expresiones/Aritmeticas.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/tipoDato.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/sintactico.cup</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/expresiones/Incremento.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/proyecto1_vj2024/Interfaz.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/DoWhile.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/abstracto/Instruccion.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/Tipo.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/parser.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/Print.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/simbolo/tablaSimbolos.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/Analisis/scanner.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/excepciones/Errores.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/expresiones/AccesoVar.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/AsignacionVar.java</file>
-            <file>file:/C:/Users/rodri/Documents/NetBeansProjects/Proyecto1_VJ2024/src/instrucciones/For.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/Analisis/lexico.jflex</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/simbolo/Simbolo.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/proyecto1_vj2024/Interfaz.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/instrucciones/Print.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/instrucciones/While.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/simbolo/tablaSimbolos.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/simbolo/Tipo.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/instrucciones/AsignacionLista.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/simbolo/Arbol.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/abstracto/Instruccion.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/Analisis/sintactico.cup</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/instrucciones/Append.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/instrucciones/Return.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/ast/NodoAST.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/instrucciones/DeclaracionLista.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/instrucciones/Remove.java</file>
+            <file>file:/C:/Users/rodri/Downloads/VJ2024_Proyecto1_F1_202204496-main/VJ2024_Proyecto1_F1_202204496-main/src/Analisis/parser.java</file>
         </group>
     </open-files>
 </project-private>

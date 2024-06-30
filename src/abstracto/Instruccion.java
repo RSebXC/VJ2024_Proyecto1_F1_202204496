@@ -24,4 +24,11 @@ public abstract class Instruccion {
     }
 
     public abstract Object interpretar(Arbol arbol, tablaSimbolos tabla);
+
+    public Tipo getTipo() {
+        return this.tipo;
+    }
+    
+    
+    
 }

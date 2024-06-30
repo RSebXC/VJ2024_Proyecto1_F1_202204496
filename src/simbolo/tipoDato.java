@@ -15,5 +15,6 @@ public enum tipoDato {
     CARACTER,
     CADENA,
     VOID,
-    
+    VECTOR,
+    LISTA
 }

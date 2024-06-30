@@ -52,20 +52,19 @@ public class tablaSimbolos {
     }
 
     public boolean setVariable(Simbolo simbolo) {
-    Simbolo busqueda = (Simbolo) this.tablaActual.get(simbolo.getId().toLowerCase());
-    if (busqueda == null) {
-        this.tablaActual.put(simbolo.getId().toLowerCase(), simbolo);
-        System.out.println("Símbolo agregado: " + simbolo.getId());
-        return true;
+        Simbolo busqueda = (Simbolo) this.tablaActual.get(simbolo.getId().toLowerCase());
+        if (busqueda == null) {
+            this.tablaActual.put(simbolo.getId().toLowerCase(), simbolo);
+            System.out.println("Símbolo agregado: " + simbolo.getId());
+            return true;
+        }
+        System.out.println("Símbolo ya existe: " + simbolo.getId());
+        return false;
     }
-    System.out.println("Símbolo ya existe: " + simbolo.getId());
-    return false;
-}
 
     public Simbolo getVariable(String id) {
         for (tablaSimbolos i = this; i != null; i = i.getTablaAnterior()) {
-            Simbolo busqueda = (Simbolo) i.tablaActual.
-                    get(id.toLowerCase());
+            Simbolo busqueda = (Simbolo) i.tablaActual.get(id.toLowerCase());
             if (busqueda != null) {
                 return busqueda;
             }
@@ -73,11 +72,10 @@ public class tablaSimbolos {
         return null;
     }
     
-    
-     public boolean actualizarVariable(String id, Simbolo nuevoValor) {
+    public boolean actualizarVariable(String id, Simbolo nuevoValor) {
         for (tablaSimbolos t = this; t != null; t = t.tablaAnterior) {
-            if (t.tablaActual.containsKey(id)) {
-                t.tablaActual.put(id, nuevoValor);
+            if (t.tablaActual.containsKey(id.toLowerCase())) {
+                t.tablaActual.put(id.toLowerCase(), nuevoValor);
                 return true;
             }
         }
@@ -95,18 +93,24 @@ public class tablaSimbolos {
     html.append("<h1>Tabla de Símbolos</h1>");
     html.append("<table border='1'>");
     html.append("<tr>");
+    html.append("<th>Ámbito</th>");
     html.append("<th>Nombre</th>");
     html.append("<th>Tipo</th>");
     html.append("<th>Valor</th>");
     html.append("</tr>");
 
-    for (String key : tablaActual.keySet()) {
-        Simbolo simbolo = (Simbolo) tablaActual.get(key);
-        html.append("<tr>");
-        html.append("<td>").append(simbolo.getId()).append("</td>");
-        html.append("<td>").append(simbolo.getTipo()).append("</td>");
-        html.append("<td>").append(simbolo.getValor()).append("</td>");
-        html.append("</tr>");
+    // Recorrer todas las tablas de símbolos desde la actual hasta la raíz
+    for (tablaSimbolos tabla = this; tabla != null; tabla = tabla.getTablaAnterior()) {
+        String ambito = (tabla.getNombre().isEmpty()) ? "Global" : tabla.getNombre();
+        for (String key : tabla.getTablaActual().keySet()) {
+            Simbolo simbolo = (Simbolo) tabla.getTablaActual().get(key);
+            html.append("<tr>");
+            html.append("<td>").append(ambito).append("</td>");
+            html.append("<td>").append(simbolo.getId()).append("</td>");
+            html.append("<td>").append(simbolo.getTipo().toString()).append("</td>");
+            html.append("<td>").append(simbolo.getValor().toString()).append("</td>");
+            html.append("</tr>");
+        }
     }
 
     html.append("</table>");
@@ -115,6 +119,6 @@ public class tablaSimbolos {
 
     return html.toString();
 }
-
+    
     
 }

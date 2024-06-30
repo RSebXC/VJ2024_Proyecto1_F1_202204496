@@ -48,5 +48,12 @@ public class Simbolo {
         this.valor = valor;
     }
     
-    
+    @Override
+    public String toString() {
+        return "Simbolo{" +
+                "id='" + id + '\'' +
+                ", valor=" + valor +
+                ", tipo=" + tipo +
+                '}';
+    }
 }

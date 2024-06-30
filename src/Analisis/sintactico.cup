@@ -7,16 +7,30 @@ import abstracto.Instruccion;
 import simbolo.Tipo;
 import simbolo.tipoDato;
 import excepciones.Errores;
+import java.util.HashMap;
 
 //instrucciones
 import instrucciones.Print;
 import instrucciones.Declaracion;
+import instrucciones.DeclaracionLista;
 import instrucciones.AsignacionVar;
 import instrucciones.If;
 import instrucciones.For;
 import instrucciones.Break;
 import instrucciones.While;
 import instrucciones.DoWhile;
+import instrucciones.Continue;
+import instrucciones.Metodo;
+import instrucciones.Execute;
+import instrucciones.Llamada;
+import instrucciones.Vector;
+import instrucciones.Return;
+import instrucciones.AccesoVector;
+import instrucciones.AsignacionVec;
+import instrucciones.AccesoLista;
+import instrucciones.AsignacionLista;
+import instrucciones.Append;
+import instrucciones.Remove;
 
 //expresiones
 import expresiones.Nativo;
@@ -61,25 +75,35 @@ action code
 :}
 
 terminal String CADENA, ENTERO, DECIMAL, CHAR_LITERAL, ID;
-terminal FINCADENA, IMPRIMIR, INT, DOUBLE,CHAR, STRING, DPUNTOS;
+terminal FINCADENA, IMPRIMIR, INT, DOUBLE,CHAR, STRING, DPUNTOS, PUNTO;
 terminal PAR1, PAR2, MAS, MENOS, UMENOS, DIV, MULT, MOD, EQUALS;
 terminal INCREMENT, DECREMENT;
 terminal IGUAL, POW, MENOR, MAYOR, NOT, DIF, OR, XOR, AND;
-terminal MAYORIGUAL, MENORIGUAL;
-terminal TRUE, FALSE, IF, BOOL, ELSE;
-terminal LLAVE1, LLAVE2,CONST, VAR;
+terminal MAYORIGUAL, MENORIGUAL, CORD, CORI, CORTU;
+terminal TRUE, FALSE, IF, BOOL;
+terminal LLAVE1, LLAVE2, CONST, VAR;
 terminal FOR, WHILE, DOWHILE;
 terminal String BREAK, CONTINUE;
+terminal VOID, COMA, EXECUTE;
+terminal RETURN, LIST, NEW, APPEND, REMOVE;
 
 // No terminales
 nonterminal LinkedList<Instruccion> INICIO, INSTRUCCIONES;
 nonterminal Instruccion INSTRUCCION;
 nonterminal Instruccion EXPRESION;
-nonterminal Instruccion IMPRESION, DECLARACION,ASIGNACION;
-nonterminal Instruccion SIF, SELSE;
+nonterminal Instruccion IMPRESION, DECLARACION,ASIGNACION, ASIGV;
+nonterminal Instruccion SIF, ASIGL;
 nonterminal Instruccion CFOR, ACTUALIZA_FOR, CWHILE, CDOWHILE, MUT;
-nonterminal Instruccion BREAKK, CONTINUEE;
+nonterminal Instruccion BREAKK, CONTINUEE, RETURNN;
 nonterminal Tipo TIPOS;
+nonterminal Instruccion VEC1, VEC2;
+nonterminal LinkedList<LinkedList<Instruccion>> LISTV2;
+nonterminal LinkedList<Instruccion> LISTV1;
+nonterminal Instruccion METODO;
+nonterminal LinkedList<HashMap> PARAMS;
+nonterminal Instruccion EXECUTEE;
+nonterminal LinkedList<Instruccion> PARAMSCALL;
+nonterminal Instruccion LLAMADA, LISTA, APPENDD, REMOVEE;
 
 // Precedencia de operadores
 precedence left INCREMENT, DECREMENT;
@@ -110,8 +134,18 @@ INSTRUCCION ::= IMPRESION: a        {:   RESULT=a;   :}
               | CFOR:a              {:   RESULT=a;   :}
               | BREAKK:a            {:   RESULT=a;   :}
               | CONTINUEE:a         {:   RESULT=a;   :}
-              | CWHILE:a             {:   RESULT=a;   :}
-              | CDOWHILE:a           {:   RESULT=a;   :}
+              | METODO:a            {:   RESULT=a;   :}
+              | EXECUTEE:a          {:   RESULT=a;   :}
+              | RETURNN:a           {:   RESULT=a;   :}
+              | CWHILE:a            {:   RESULT=a;   :}
+              | LLAMADA:a           {:   RESULT=a;   :}
+              | CDOWHILE:a          {:   RESULT=a;   :}
+              | VEC1:a              {:   RESULT=a;   :}
+              | VEC2:a              {:   RESULT=a;   :}
+              | ASIGV:a             {:   RESULT=a;   :}
+              | LISTA:a             {:   RESULT=a;   :}
+              | APPENDD:a           {:   RESULT=a;   :}
+              | REMOVEE:a            {:   RESULT=a;   :}
               | error FINCADENA
 ;
 
@@ -125,6 +159,42 @@ MUT ::= VAR:a     {:   RESULT = new Nativo(false, new Tipo(tipoDato.BOOLEANO), a
     |   CONST:a  {:   RESULT = new Nativo(true, new Tipo(tipoDato.BOOLEANO), aleft, aright );   :}
 ;
 
+VEC1 ::= MUT ID:a DPUNTOS TIPOS:c CORTU IGUAL CORI LISTV1:b CORD FINCADENA
+        {: RESULT = new Vector(a, b, c, aleft, aright); :}
+;
+
+VEC2 ::= MUT ID:a DPUNTOS TIPOS:c CORTU CORTU IGUAL CORI LISTV2:b CORD FINCADENA
+         {: RESULT = new Vector(a, b, c, true,aleft, aright); :}
+;
+
+LISTV1 ::= LISTV1:a COMA EXPRESION:b 
+           {: 
+              RESULT = a; 
+              RESULT.add(b); 
+           :}
+         | EXPRESION:a 
+           {: 
+              RESULT = new LinkedList<Instruccion>(); 
+              RESULT.add(a); 
+           :}
+         ;
+
+LISTV2 ::= LISTV2:a COMA CORI LISTV1:b CORD 
+           {: 
+              RESULT = a; 
+              RESULT.add(b); 
+           :}
+         | CORI LISTV1:a CORD 
+           {: 
+              RESULT = new LinkedList<LinkedList<Instruccion>>(); 
+              RESULT.add(a); 
+           :}
+         ;
+
+
+ASIGV ::= ID:a CORI EXPRESION:b CORD IGUAL EXPRESION:c FINCADENA {:   RESULT=new AsignacionVec(a, b,c, aleft, aright);  :}
+        | ID:a CORI EXPRESION:b CORD CORI EXPRESION:c CORD IGUAL EXPRESION:d FINCADENA {:   RESULT=new AsignacionVec(a, b,c, d, aleft, aright);  :}
+;
 
 ASIGNACION ::= ID:a IGUAL EXPRESION:b FINCADENA  {:   RESULT=new AsignacionVar(a, b, aleft, aright);  :}
 ;
@@ -133,8 +203,49 @@ SIF ::= IF PAR1 EXPRESION:a PAR2 LLAVE1 INSTRUCCIONES:b LLAVE2  {:   RESULT = ne
     
 ;
 
+LISTA ::= LIST MENOR TIPOS:a MAYOR ID:b IGUAL NEW LIST PAR1 PAR2 FINCADENA {: RESULT = new DeclaracionLista(a, b, aleft, aright); :}
+;
 
+APPENDD ::= ID:a PUNTO APPEND PAR1 EXPRESION:b PAR2 FINCADENA {: RESULT = new instrucciones.Append(a, b, aleft, aright); :}
+;
 
+REMOVEE ::= ID:a PUNTO REMOVE PAR1 EXPRESION:b PAR2 FINCADENA {: RESULT = new instrucciones.Remove(a, b, aleft, aright); :}
+;
+
+METODO ::= TIPOS:a ID:b PAR1 PARAMS:p PAR2 LLAVE1 INSTRUCCIONES:c LLAVE2    {:   RESULT= new Metodo(b, p, c, a, aleft, aright );   :}
+        |  TIPOS:a ID:b PAR1 PAR2 LLAVE1 INSTRUCCIONES:c LLAVE2             {:   RESULT= new Metodo(b, new LinkedList<HashMap>(), c, a, aleft, aright );   :}
+;
+
+PARAMS ::= PARAMS:a COMA TIPOS:b ID:c   {:  
+                                            RESULT = a;
+                                            var hm2= new HashMap<String, Object>();
+                                            hm2.put("id", c);
+                                            hm2.put("tipo", b);
+                                            RESULT.add(hm2);
+                                        :}
+        | TIPOS:a ID:b                  {:  RESULT = new LinkedList<HashMap>(); 
+                                            var hm = new HashMap<String, Object>();
+                                            hm.put("id",b);
+                                            hm.put("tipo", a);
+                                            RESULT.add(hm);
+                                        :}
+;
+
+EXECUTEE ::=  EXECUTE ID:a PAR1 PARAMSCALL:b PAR2 FINCADENA     {:   RESULT = new Execute(a, b, aleft, aright );   :}
+            | EXECUTE ID:a PAR1 PAR2 FINCADENA                  {:   RESULT = new Execute(a, new LinkedList<Instruccion>(), aleft, aright );   :}
+;
+
+LLAMADA ::= ID:a PAR1 PARAMSCALL:b PAR2 FINCADENA               {:  RESULT= new Llamada(a, b, aleft, aright);    :}
+          | ID:a PAR1 PAR2 FINCADENA                            {:  RESULT= new Llamada(a, new LinkedList<Instruccion>(), aleft, aright);    :}    
+;
+
+PARAMSCALL ::= PARAMSCALL:a COMA EXPRESION:e    {:  RESULT = a;
+                                                    RESULT.add(e);
+                                                :}
+            | EXPRESION:a                       {:  RESULT = new LinkedList<Instruccion>(); 
+                                                    RESULT.add(a);
+                                                :}
+;
 
 CFOR ::= FOR PAR1 ASIGNACION:a EXPRESION:b FINCADENA ACTUALIZA_FOR:c PAR2 LLAVE1 INSTRUCCIONES:d LLAVE2     
 {:   RESULT = new For(a, b, c, d, aleft, aright);   :}
@@ -156,7 +267,11 @@ CDOWHILE ::= DOWHILE LLAVE1 INSTRUCCIONES:a LLAVE2 WHILE PAR1 EXPRESION:b PAR2 F
 BREAKK ::= BREAK:a FINCADENA      {:    RESULT = new Break(aleft, aright);     :}
 ;
 
-CONTINUEE ::= CONTINUE:a FINCADENA {: RESULT = new Break(aleft, aright); :}
+CONTINUEE ::= CONTINUE:a FINCADENA {: RESULT = new Continue(aleft, aright); :}
+;
+
+RETURNN ::= RETURN:a EXPRESION:b FINCADENA {: RESULT = new Return(b, aleft, aright); :}
+           | RETURN:a FINCADENA {: RESULT = new Return(aleft, aright); :}
 ;
 
 TIPOS ::= INT       {:   RESULT=new Tipo(tipoDato.ENTERO);   :}
@@ -164,6 +279,7 @@ TIPOS ::= INT       {:   RESULT=new Tipo(tipoDato.ENTERO);   :}
         | CHAR      {:   RESULT=new Tipo(tipoDato.CARACTER);   :}
         | STRING    {:   RESULT=new Tipo(tipoDato.CADENA);   :}
         | BOOL      {:   RESULT=new Tipo(tipoDato.BOOLEANO);   :}
+        | VOID      {:   RESULT=new Tipo(tipoDato.VOID);   :}
 ;
 
 EXPRESION ::= MENOS EXPRESION:a             {:   RESULT = new Aritmeticas(a, OperadoresAritmeticos.NEGACION, aleft, aright);   :} %prec UMENOS
@@ -198,12 +314,10 @@ EXPRESION ::= MENOS EXPRESION:a             {:   RESULT = new Aritmeticas(a, Ope
             | TRUE:a        {:   RESULT = new Nativo(true, new Tipo(tipoDato.BOOLEANO), aleft, aright );   :}
             | FALSE:a       {:   RESULT = new Nativo(false, new Tipo(tipoDato.BOOLEANO), aleft, aright );    :}
             | ID:a          {:   RESULT = new AccesoVar(a, aleft, aright);   :}
+            | ID:a CORI ENTERO:b CORD CORI ENTERO:c CORD{: RESULT = new AccesoVector(a, Integer.parseInt(b),Integer.parseInt(c), aleft, aright); :}
+            | ID:a CORI ENTERO:b CORD{: RESULT = new AccesoVector(a, Integer.parseInt(b), aleft, aright); :}
             | CHAR_LITERAL:a {:   RESULT = new Nativo(a, new Tipo(tipoDato.CARACTER), aleft, aright );   :} 
+            | RETURNN:a {:   RESULT=a;   :}
+            | LLAMADA:a {:   RESULT=a;   :}
             |PAR1 EXPRESION:a PAR2 {:   RESULT = a;   :}
 ;
-
-
-
-
-
-
